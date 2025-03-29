@@ -7,13 +7,16 @@
         <script>
            document.getElementById("nav").style.display = "block";
         </script>
-        <form method="post" class="mt-5" style="width: 400px;">
-            {% csrf_token %}
-   
-            {{form|crispy}}
-            
-            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 " style="width: 300px;">
-        </form>
+        <div class="container">
+            <form method="post" class="mt-5" style="max-width: 400px;" >
+                {% csrf_token %}
+       
+                {{form|crispy}}
+                
+                <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 " style="width: 300px;">
+            </form>
+        </div>
+ 
 
     </center>
    
