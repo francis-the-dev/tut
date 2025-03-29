@@ -111,7 +111,7 @@
                     {% if user.is_authenticated %}
                     <!-- become a tutor small screen -->
                     <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
-                        href="#" style="display: inline-block;">
+                        href="{% url 'tutor_reg'%}" style="display: inline-block;">
                         Become a tutor </a>
 
                     <!-- logout small screen -->
@@ -201,13 +201,13 @@
     <div class="mt-5">
         {% for i in data %}
         <div class="container">
-            <div class="card shadow mt-4 border rounded bg-light cardh" style="height: 120px;">
+            <div class="card shadow mt-4 border rounded bg-light cardh" style="height: 200px;">
 
                 <div class="row">
                     <div class="col-3">
                         <div>
                             <img src="{{ i.profile.url }}" alt="No profile"
-                                class=" rounded-circle img-fluid img-circ  ms-5 mt-3 " width="200px">
+                                class=" rounded-circle img-fluid img-circ  ms-4 mt-3 " style="max-width: 200px;">
                                 
                         </div>
 
