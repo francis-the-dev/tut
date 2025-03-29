@@ -6,17 +6,25 @@
     <script>
         document.getElementById("nav").style.display = "block";
     </script>
-    <center>
-        <form method="post" style="width: 400px; margin-bottom: 100px;" class="mt-5 ">
-            {% csrf_token %}
-        
-            {{form|crispy}}
-            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 shadow mb-5" 
-            style="width: 300px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <center>
+                    <form method="post" style=" margin-bottom: 100px; max-width: 400px;" class="mt-5 ">
+                        {% csrf_token %}
+                    
+                        {{form|crispy}}
+                        <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 shadow mb-5" 
+                        style="width: 300px;">
+            
+                
+                    </form>
+                </center>
+            </div>
+        </div>
+      
+    </div>
 
-    
-        </form>
-    </center>
 
    
 
