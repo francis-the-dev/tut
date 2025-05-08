@@ -51,16 +51,7 @@
             opacity: 0.7;
         }
 
-        /* controls radius only on md screens and above */
-        @media (min-width: 768px) {
 
-
-            .custom-pill {
-                border-radius: 50rem;
-            }
-        }
-
-        /* changing border color of navbar icon */
         .navbar-toggler {
             border-color: rgb(185, 179, 179);
 
@@ -73,55 +64,64 @@
         }
 
         .back-nav {
-            background-color: grey;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+        }
+
+        .back-nav1 {
+            background-color: rgb(77, 73, 73);
         }
 
         .hidden {
             display: none;
         }
-        .cardh:hover{
+      
+
+        .cardh:hover {
             opacity: 0.9;
-        }
-        .cardh:active{
-            color: grey;
+           
         }
 
+        .cardh:active {
+            color: grey;
+        }
+      
         /* end nav */
     </style>
 </head>
 
 <body>
 
-
-    <!-- nav -->
-    <nav class="navbar navbar-expand-md navbar-light back-nav border-none custom-pill shadow ms-2 me-2 mt-1 hidden "
-        id="nav">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md  back-nav1  custom-pill   hidden " id="nav">
         <div class="container-fluid">
-            <a class="navbar-brand text-light fw-bold fs-2 ms-3" href="{%url 'home' %}">Scholarly</a>
+            <a class="navbar-brand text-light  display-5 fw-semibold fs-2 ms-3" href="{% url 'home'%}">Scholarly</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon "></span>
             </button>
             <div class="collapse justify-content-center navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ">
-                    <a class="nav-link text-light fs-5 anim" aria-current="page" href="{% url 'home' %}">Home</a>
-                    <a class="nav-link text-light fs-5 anim" href="#">FAQ </a>
+                    <a class="nav-link text-light display-5 anim fw-semibold" style="font-size: 19px;"
+                        saria-current="page" href="{% url 'home' %}">Home</a>
+
                     <!-- only seen on small screens in the toggle -->
                     <!-- if for the small screen phones -->
                     {% if user.is_authenticated %}
                     <!-- become a tutor small screen -->
-                    <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
-                        href="#" style="display: inline-block;">
-                        Become a tutor </a>
+                    <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none "
+                        href="{%  url 'tutor_reg' %}" style="display: inline-block;">
+                        <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold" type="submit">
+                            Become a Tutor</button>
+                    </a>
 
                     <!-- logout small screen -->
                     <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
                         {% csrf_token %}
-                        <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none " href="#"
-                            style="display: inline-block;">
-                            <button class="btn btn-outline-light text-dark fw-bold" type="submit">
-                                log out </button>
-                        </a>
+                        <input type="submit"
+                            class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold "
+                            value="log out">
                     </form>
 
 
@@ -133,7 +133,7 @@
 
                     <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none "
                         href="{%  url 'register' %}" style="display: inline-block;">
-                        <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                        <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold" type="submit">
                             Register</button>
                     </a>
 
@@ -144,31 +144,31 @@
 
             </div>
             <!-- the login at the end of the nav -->
-            <div class=" navbar-nav justify-content-end d-none d-md-block">
+            <div class=" navbar-nav justify-content-end d-none d-md-block me-4">
                 <!-- if for the end of the navbar -->
                 {% if user.is_authenticated %}
 
+                <!-- become a tutor on large screens -->
 
-                <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
-                    {% csrf_token %}
-                    <a class=" ms-2 nav-link " href="" style="display: inline-block;">
-                        <button class="btn btn-outline-light text-dark shadow fw-bold" type="submit">log out</button>
-                    </a>
-                </form>
-
-
-
-                <a class="nav-link" href="{% url 'tutor_reg' %}" style="display: inline-block;">
-                    <button class="btn btn-outline-light text-dark shadow fw-bold">Become a tutor</button>
+                <a class="nav-link  " href="{%  url 'tutor_reg' %}" style="display: inline-block;">
+                    <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold" type="submit">
+                        Become a Tutor</button>
                 </a>
 
+                <!-- log out on large screens -->
+                <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
+                    {% csrf_token %}
+                    <input type="submit" class="nav-link text-light anim fw-semibold " value="log out">
+                </form>
+                <!-- end logout -->
 
                 {% else %}
+                <!-- not authenticated -->
 
-                <a class="nav-link text-light anim fw-bold" href="{% url 'login' %}"
-                    style="display: inline-block;">Login </a>
-                <a class=" ms-2 nav-link " href="{% url 'register' %}" style="display: inline-block;">
-                    <button class="btn btn-outline-light text-dark shadow fw-bold">Register</button>
+                <a class="nav-link text-light anim fw-semibold " href="{% url 'login' %}"
+                    style="display: inline-block; font-size: 19px;">Log in </a>
+                <a class=" ms-2 nav-link  " href="{% url 'register' %}" style="display: inline-block; font-size: 19px;">
+                    <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold">Register</button>
                 </a>
 
 
@@ -190,75 +190,103 @@
 
     {% if user.is_authenticated %}
     <!-- logged in user logic -->
-    <!-- to do  -->
-    <!-- design the ui of all pages, homepage when logged,become a tutor page and the tutor detail page
-        handle the error of one to one models
-        thats all -->
+
+    <!-- design the cards in the user logged in page ,us ethe design in superprof.com -->
+    <!-- implement email in registration  such that users can sign in using the email account or google auth -->
+    <!-- add reset password  -->
+    <!-- add features for updating ,user account info and the tutor cards -->
+    <!-- resize image or cap them to certain bytes -->
+    <!-- add search implementation -->
+
+
+
+
     <script>
         document.getElementById("nav").style.display = "block";
     </script>
 
-    <div class="mt-5">
-        {% for i in data %}
-        <div class="container">
-            <div class="card shadow mt-4 border rounded bg-light cardh" style="height: 120px;">
+    <!-- tutor cards code -->
 
-                <div class="row">
-                    <div class="col-3">
-                        <div>
-                            <img src="{{ i.profile.url }}" alt="No profile"
-                                class=" rounded-circle img-fluid img-circ  ms-5 mt-3 " width="200px">
-                                
-                        </div>
+    <div class=" container" >
 
-                    </div>
-                    <div class="col-6">
-                        <a href="{% url 'scholar_det' i.id %}" style="text-decoration: none; color: black;">
+        <div class="row mt-5">
 
-                            <div class="card-body ps-5 ">
-                                <div class="card-title">
-                                    <p class="text-mute">{{i.user.username}}</p>
+            {% for i in data %}
+
+
+            <div class=" col-md-3 ">
+                <div class="card shadow mt-1 mb-3 border-1 border-rounded rounded bg-light cardh " style="height: 300px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url({{ i.profile.url }});
+            background-position: center; background-repeat: no-repeat; background-size: cover; ">
+
+
+<!-- 
+                    <div>
+                        <img src="{{ i.profile.url }}" alt="No profile"
+                            class=" rounded-circle img-fluid img-circ  ms-4 mt-3 " style="max-width: 200px;">
+
+                    </div> -->
+
+
+
+                    <a href="{% url 'scholar_det' i.id %}" style="text-decoration: none; color: black;">
+
+                        <div class="card-body me-5 p-3 pb-3  " >
+
+                           
+
+                                <div class="card-title " style="margin-top: 170px; margin-right: 100px;">
+                                    <p class="text-light fs-5 fw-bold">{{i.user.username}}</p>
                                 </div>
-
-
-                                <div class="card-text fs-4">
+    
+    
+                                <div class="card-text text-light fs-5 fw-semibold" >
                                     <p>{{i.expertise}}</p>
                                 </div>
+    
+                           
+                            
+
+
+                        </div>
+
+                    </a>
 
 
 
-                            </div>
-
-                        </a>
 
 
-                    </div>
+
                 </div>
-
-
             </div>
+
+
+
+
+
+            {% endfor %}
         </div>
 
     </div>
 
-    {% endfor %}
+    <!-- end of tutor cards -->
 
-    
-    
+
+
 
     {% else %}
     <!-- landing page when user is not logged in -->
     <div class="box1" style="
-        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) ,url('{% static 'images/bg2.jpg'%}') no-repeat center center/cover; 
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) ,url('{% static 'images/bg2.jpg'%}') no-repeat center center/cover; 
         height: 100vh;">
         <div class="pb-1">
 
         </div>
         <!-- error in acceptable -->
         <!-- navbar -->
-        <nav class="navbar navbar-expand-md navbar-light back-nav border-none custom-pill shadow ms-2 me-2 mt-1 ">
+        <nav class="navbar navbar-expand-md navbar-light back-nav border-none custom-pill  ms-2 me-2 mt-1 ">
             <div class="container-fluid">
-                <a class="navbar-brand text-light fw-bold fs-2 ms-3" href="#">Scholarly</a>
+                <a class="navbar-brand text-light display-5 fw-semibold fs-2 ms-3" href="#">Scholarly</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -266,8 +294,9 @@
                 </button>
                 <div class="collapse justify-content-center navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ">
-                        <a class="nav-link text-light fs-5 anim" aria-current="page" href="{% url 'home' %}">Home</a>
-                        <a class="nav-link text-light fs-5 anim" href="#">FAQ </a>
+                        <a class="nav-link text-light display-5 anim fw-semibold" style="font-size: 19px;"
+                            saria-current="page" href="{% url 'home' %}">Home</a>
+
                         <!-- only seen on small screens in the toggle -->
                         <!-- if for the small screen phones -->
                         {% if user.is_authenticated %}
@@ -295,7 +324,7 @@
 
                         <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none "
                             href="{%  url 'register' %}" style="display: inline-block;">
-                            <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                            <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold" type="submit">
                                 Register</button>
                         </a>
 
@@ -328,10 +357,11 @@
 
                     {% else %}
 
-                    <a class="nav-link text-light anim fw-bold" href="{% url 'login' %}"
-                        style="display: inline-block;">Login </a>
-                    <a class=" ms-2 nav-link " href="{% url 'register' %}" style="display: inline-block;">
-                        <button class="btn btn-outline-light text-dark shadow fw-bold">Register</button>
+                    <a class="nav-link text-light anim fw-semibold " href="{% url 'login' %}"
+                        style="display: inline-block; font-size: 19px;">Log in </a>
+                    <a class=" ms-2 nav-link  " href="{% url 'register' %}"
+                        style="display: inline-block; font-size: 19px;">
+                        <button class="btn btn-light text-dark ps-3 pe-3 rounded-pill  fw-semibold">Register</button>
                     </a>
 
 
@@ -348,19 +378,18 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12 text-center " style="margin-top: 150px;">
-                        <p class="display-5 fw-bold  text-light ">
-                            Grade up . and achieve all <br> your dreams today
+                        <p class="display-3   text-light ">
+                            Grade up , and achieve <br> your dreams today
                         </p>
                     </div>
 
                     <div class="col-12 text-center mt-2">
                         <a href="{% url 'register' %}"
-                            class="btn btn-outline-secondary text-light mt-sm-3  me-3 btn-lg shadow border border-light">Become
-                            a
-                            Member</a>
-                        <a
-                        href="{% url 'login' %}"
-                            class="btn btn-outline-secondary  mt-sm-3 text-light btn-lg shadow border border-light">Sign in </a>
+                            class="btn btn-light text-dark mt-sm-3  me-3 btn-lg shadow border-dark fw-semibold ps-5 pe-5 rounded-pill">
+                            Become a Member </a>
+                        <a href="{% url 'login' %}"
+                            class="btn btn-outline-dark shadow mt-sm-3 text-light btn-lg border-dark fw-semibold ps-5 pe-5 rounded-pill ">Log
+                            In </a>
                     </div>
                 </div>
 

@@ -4,6 +4,7 @@ from .forms import tutor_form
 from .models import tutor_model
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from django.contrib import messages
 
 
 
@@ -18,6 +19,7 @@ def register(request):
         form = UserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,'account created')
             return redirect('login')
     else:
         form = UserCreationForm()

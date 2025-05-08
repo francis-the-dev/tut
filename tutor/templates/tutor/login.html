@@ -3,11 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
     <center>
         <script>
            document.getElementById("nav").style.display = "block";
         </script>
-        <form method="post" class="mt-5" style="width: 400px;">
+        <form method="post" class="mt-5" style="width: 480px;">
             {% csrf_token %}
    
             {{form|crispy}}
