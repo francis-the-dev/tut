@@ -1,0 +1,154 @@
+{% extends "tutor/homepage.html"%}
+
+
+{% block content %}
+<script>
+    document.getElementById("nav").style.display = "block";
+    var num = 0
+    var con = true
+   
+    //var tr = document.getElementById('transcript') 
+    function clicked(){
+        
+        
+        if (con){
+        var img = document.createElement('img')
+        img.src = '{{data_ob.transcript.url}}'
+        img.style.width = "500px";
+        img.style.height = "500px";
+        img.alt = "no transcript uploaded "
+        img.classList.add("img-fluid")
+        
+        var tr = document.getElementById('transcript') 
+        tr.appendChild(img)
+        num+=1
+        
+        }
+        if (num>=1){
+        con = false
+    }
+       
+      
+
+        
+
+    }
+    
+    
+</script>
+
+<div class="container">
+    <div class="card bg-light rounded shadow border-none mt-5" ">
+        <div class="row card-body">
+            <!-- profile image -->
+            <div class="col-md-6 ">
+                <div class=" mt-5 ">
+                    <img src="{{ data_ob.profile.url }}" alt="No profile"
+                        class=" rounded-circle img-fluid img-circ  ms-5 mt-3 mb-5" width="200px" style="height: 200px; width: 200px;">
+
+                </div>
+
+            </div>
+            <!-- title -->
+            <div class="col-md-6">
+                <!-- username -->
+                <div class=" fs-bold fs-3">
+                    {{ data_ob.user.username }}
+                </div>
+                <!-- expertise -->
+                <div class="card-text">
+                    {{ data_ob.expertise }}
+                </div>
+                <!-- number -->
+                <div class="card-text">
+                    {{ data_ob.number }}
+                </div>
+                <!-- units -->
+                <div class="card-text">
+                    {{ data_ob.unit }}
+                </div>
+                <!-- price -->
+                <div class="card-text">
+                    <p class=" fs-5">ksh {{ data_ob.price_per_hour }} per hour</p>
+                    
+                </div>
+
+    
+
+                <div class="row justify-content-center align-items-center" style="margin-top: 100px;">
+
+                    <!-- contact -->
+                    <div class="col-md-3  col-sm-12 card-text">
+                        <a href="https://wa.me/{{ data_ob.number }}" class="btn btn-outline-secondary">Contact on Whats app</a>
+                    </div>
+                    <!-- transcript -->
+                    <div class="col-md-3  col-sm-12 card-text">
+                        <button class="btn btn-outline-secondary" onclick="clicked()">Transcript</button>
+                    </div>
+                    <!-- delete -->
+                    <div class="col-md-3 col-sm-12 card-text " >
+                        {%if data_ob.user.username == user.username %}
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            <input type="submit" class="btn btn-outline-secondary" value="delete">
+                        </form>
+
+                        {% endif %}
+                    </div>
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+       
+
+       
+    </div>
+
+    <!-- <div class="card shadow">
+        <div class="card-body text-center">
+            <div class="card-title fs-bold fs-3">
+                {{ data_ob.user.username }}
+            </div>
+
+
+            <div class="card-text">
+                <img src="{{ data_ob.profile.url }}" alt="No profile"
+                    class=" rounded-circle img-fluid img-circ  ms-5 mt-3 " width="200px">
+            </div>
+
+            <div class="card-text">
+                {{ data_ob.number }}
+            </div>
+            <div class="card-text">
+                {{ data_ob.expertise }}
+            </div>
+            <a class="btn btn-primary" href="https://wa.me/254745692444"> whatsapp</a>
+
+        </div>
+    </div> -->
+
+     <!-- transcript place  -->
+    <div class="card bg-light text-center mt-5 mb-5 pt-5 shadow">
+        <div class="card-body">
+            <div class="card-title fs-5">Transcript</div>
+            <div class="card-text mb-3 fs-5">For better clarity save image</div>
+            
+            <div id="transcript" class="img-fluid">
+                
+            </div>
+        </div>
+        
+
+        
+       
+
+    </div>
+
+</div>
+
+
+{% endblock %}

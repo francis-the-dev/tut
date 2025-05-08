@@ -1,0 +1,21 @@
+{% extends "tutor/homepage.html"%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <center>
+        <script>
+           document.getElementById("nav").style.display = "block";
+        </script>
+        <form method="post" class="mt-5" style="width: 400px;">
+            {% csrf_token %}
+   
+            {{form|crispy}}
+            
+            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 " style="width: 300px;">
+        </form>
+
+    </center>
+   
+
+{% endblock %}

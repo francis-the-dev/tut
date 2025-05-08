@@ -1,0 +1,382 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'bootstrap/css/bootstrap.css'%}">
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+
+
+        }
+
+
+        .img-circ {
+            width: 90px;
+            height: 90px;
+            border-radius: 100px;
+            object-fit: cover;
+
+
+        }
+
+        .nav-cent {
+            left: 50%;
+            transform: translateX(-50);
+
+        }
+
+        /* navbar css */
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+
+        }
+
+
+
+        .anim {
+            transition: opacity 0.15;
+        }
+
+        .anim:hover {
+            opacity: 0.7;
+        }
+
+        /* controls radius only on md screens and above */
+        @media (min-width: 768px) {
+
+
+            .custom-pill {
+                border-radius: 50rem;
+            }
+        }
+
+        /* changing border color of navbar icon */
+        .navbar-toggler {
+            border-color: rgb(185, 179, 179);
+
+        }
+
+        /* changing  color of navbar icon */
+        .navbar-toggler-icon {
+            filter: invert(1);
+
+        }
+
+        .back-nav {
+            background-color: grey;
+        }
+
+        .hidden {
+            display: none;
+        }
+        .cardh:hover{
+            opacity: 0.9;
+        }
+        .cardh:active{
+            color: grey;
+        }
+
+        /* end nav */
+    </style>
+</head>
+
+<body>
+
+
+    <!-- nav -->
+    <nav class="navbar navbar-expand-md navbar-light back-nav border-none custom-pill shadow ms-2 me-2 mt-1 hidden "
+        id="nav">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light fw-bold fs-2 ms-3" href="{%url 'home' %}">Scholarly</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="collapse justify-content-center navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ">
+                    <a class="nav-link text-light fs-5 anim" aria-current="page" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link text-light fs-5 anim" href="#">FAQ </a>
+                    <!-- only seen on small screens in the toggle -->
+                    <!-- if for the small screen phones -->
+                    {% if user.is_authenticated %}
+                    <!-- become a tutor small screen -->
+                    <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
+                        href="#" style="display: inline-block;">
+                        Become a tutor </a>
+
+                    <!-- logout small screen -->
+                    <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
+                        {% csrf_token %}
+                        <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none " href="#"
+                            style="display: inline-block;">
+                            <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                                log out </button>
+                        </a>
+                    </form>
+
+
+
+                    {% else %}
+                    <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
+                        href="{%  url 'login' %}" style="display: inline-block;">
+                        Login </a>
+
+                    <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none "
+                        href="{%  url 'register' %}" style="display: inline-block;">
+                        <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                            Register</button>
+                    </a>
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+            <!-- the login at the end of the nav -->
+            <div class=" navbar-nav justify-content-end d-none d-md-block">
+                <!-- if for the end of the navbar -->
+                {% if user.is_authenticated %}
+
+
+                <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
+                    {% csrf_token %}
+                    <a class=" ms-2 nav-link " href="" style="display: inline-block;">
+                        <button class="btn btn-outline-light text-dark shadow fw-bold" type="submit">log out</button>
+                    </a>
+                </form>
+
+
+
+                <a class="nav-link" href="{% url 'tutor_reg' %}" style="display: inline-block;">
+                    <button class="btn btn-outline-light text-dark shadow fw-bold">Become a tutor</button>
+                </a>
+
+
+                {% else %}
+
+                <a class="nav-link text-light anim fw-bold" href="{% url 'login' %}"
+                    style="display: inline-block;">Login </a>
+                <a class=" ms-2 nav-link " href="{% url 'register' %}" style="display: inline-block;">
+                    <button class="btn btn-outline-light text-dark shadow fw-bold">Register</button>
+                </a>
+
+
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </nav>
+
+    <!-- end nav -->
+
+
+    {% block content %}
+    <div class="main">
+
+    </div>
+
+    {% if user.is_authenticated %}
+    <!-- logged in user logic -->
+    <!-- to do  -->
+    <!-- design the ui of all pages, homepage when logged,become a tutor page and the tutor detail page
+        handle the error of one to one models
+        thats all -->
+    <script>
+        document.getElementById("nav").style.display = "block";
+    </script>
+
+    <div class="mt-5">
+        {% for i in data %}
+        <div class="container">
+            <div class="card shadow mt-4 border rounded bg-light cardh" style="height: 120px;">
+
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <img src="{{ i.profile.url }}" alt="No profile"
+                                class=" rounded-circle img-fluid img-circ  ms-5 mt-3 " width="200px">
+                                
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'scholar_det' i.id %}" style="text-decoration: none; color: black;">
+
+                            <div class="card-body ps-5 ">
+                                <div class="card-title">
+                                    <p class="text-mute">{{i.user.username}}</p>
+                                </div>
+
+
+                                <div class="card-text fs-4">
+                                    <p>{{i.expertise}}</p>
+                                </div>
+
+
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    
+    
+
+    {% else %}
+    <!-- landing page when user is not logged in -->
+    <div class="box1" style="
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) ,url('{% static 'images/bg2.jpg'%}') no-repeat center center/cover; 
+        height: 100vh;">
+        <div class="pb-1">
+
+        </div>
+        <!-- error in acceptable -->
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-md navbar-light back-nav border-none custom-pill shadow ms-2 me-2 mt-1 ">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light fw-bold fs-2 ms-3" href="#">Scholarly</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+                <div class="collapse justify-content-center navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ">
+                        <a class="nav-link text-light fs-5 anim" aria-current="page" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link text-light fs-5 anim" href="#">FAQ </a>
+                        <!-- only seen on small screens in the toggle -->
+                        <!-- if for the small screen phones -->
+                        {% if user.is_authenticated %}
+                        <!-- become a tutor small screen -->
+                        <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
+                            href="#" style="display: inline-block;">
+                            Become a tutor </a>
+
+                        <!-- logout small screen -->
+                        <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
+                            {% csrf_token %}
+                            <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none " href="#"
+                                style="display: inline-block;">
+                                <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                                    log out </button>
+                            </a>
+                        </form>
+
+
+
+                        {% else %}
+                        <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-light anim fw-bold"
+                            href="{%  url 'login' %}" style="display: inline-block;">
+                            Login </a>
+
+                        <a class="nav-link 	.d-none .d-sm-block .d-md-none d-lg-none d-xl-none "
+                            href="{%  url 'register' %}" style="display: inline-block;">
+                            <button class="btn btn-outline-light text-dark fw-bold" type="submit">
+                                Register</button>
+                        </a>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+                <!-- the login at the end of the nav -->
+                <div class=" navbar-nav justify-content-end d-none d-md-block">
+                    <!-- if for the end of the navbar -->
+                    {% if user.is_authenticated %}
+
+
+                    <form action="{% url 'logout' %}" method="post" style="display: inline-block;">
+                        {% csrf_token %}
+                        <a class=" ms-2 nav-link " href="" style="display: inline-block;">
+                            <button class="btn btn-outline-light text-dark shadow fw-bold" type="submit">log
+                                out</button>
+                        </a>
+                    </form>
+
+                    <!-- continue here -->
+
+                    <a class="nav-link" href="{% url 'tutor_reg' %}" style="display: inline-block;">
+                        <button class="btn btn-outline-light text-dark shadow fw-bold">Become a tutor</button>
+                    </a>
+
+
+                    {% else %}
+
+                    <a class="nav-link text-light anim fw-bold" href="{% url 'login' %}"
+                        style="display: inline-block;">Login </a>
+                    <a class=" ms-2 nav-link " href="{% url 'register' %}" style="display: inline-block;">
+                        <button class="btn btn-outline-light text-dark shadow fw-bold">Register</button>
+                    </a>
+
+
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+        </nav>
+
+        <!-- end nav -->
+        <div class="box1">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-12 text-center " style="margin-top: 150px;">
+                        <p class="display-5 fw-bold  text-light ">
+                            Grade up . and achieve all <br> your dreams today
+                        </p>
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                        <a href="{% url 'register' %}"
+                            class="btn btn-outline-secondary text-light mt-sm-3  me-3 btn-lg shadow border border-light">Become
+                            a
+                            Member</a>
+                        <a
+                        href="{% url 'login' %}"
+                            class="btn btn-outline-secondary  mt-sm-3 text-light btn-lg shadow border border-light">Sign in </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    {% endif %}
+
+
+
+    {% endblock %}
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+</body>
+
+</html>
