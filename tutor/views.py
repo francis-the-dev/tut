@@ -11,7 +11,8 @@ from django.contrib import messages
 data = tutor_model.objects.all()
 # Create your views here.
 def home(request):
-    cont_win = {'data':data}
+    x = tutor_model.objects.all()
+    cont_win = {'data':x}
     return render(request,'tutor/homepage.html',cont_win)
 
 def register(request):
