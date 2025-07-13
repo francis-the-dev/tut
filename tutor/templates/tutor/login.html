@@ -3,30 +3,65 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags}}">
-        {{message}}
-    </div>
-    {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+<script>
+    document.getElementById("nav").style.display = "block";
+
+</script>
+<style>
+    #user {
+        color: black;
+    }
+</style>
+<div class="container">
+    <center>
+
+        <form method="post" class="mt-5 form-control shadow p-5"
+            style="max-width: 480px; min-width: 100px; border: none;">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <label for="user">username</label>
+
+            {{form.username}}
+            <br>
+
+            <label for="log">password</label>
+            {{form.password}}
+
+            <label for="check" style="display: inline-block;"> Show Password : </label>
+            <input type="checkbox" id="check" style="display: inline-block;">
+
+            <br>
+            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 "
+                style="max-width: 300px; min-width: 250px;">
+        </form>
+
+    </center>
     <script>
-        document.getElementById("nav").style.display = "block";
-     </script>
-     <div class="container">
-        <center>
-        
-            <form method="post" class="mt-5" style="max-width: 480px; min-width: 100px;">
-                {% csrf_token %}
-       
-                {{form|crispy}}
-                
-                <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 " style="max-width: 300px; min-width: 250px;">
-            </form>
-    
-        </center>
-     </div>
-    
-   
+        const toggle = document.getElementById('check');
+        const password = document.getElementById('log');
+
+        toggle.addEventListener('change', function () {
+            password.type = this.checked ? 'text' : 'password';
+        });
+
+    </script>
+</div>
+
+
 
 {% endblock %}
