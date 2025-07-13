@@ -3,21 +3,56 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <script>
-        document.getElementById("nav").style.display = "block";
-    </script>
-    <center>
-        <form method="post" style="max-width: 480px; margin-bottom: 100px;" class="mt-5 ">
-            {% csrf_token %}
-        
-            {{form|crispy}}
-            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 shadow mb-5" 
-            style="width: 300px;">
+<script>
+    document.getElementById("nav").style.display = "block";
+</script>
+<style>
 
-    
+</style>
+<div class="container">
+    <center>
+        <form method="post" style="max-width: 480px; margin-bottom: 100px;" class="mt-5 shadow p-5 ">
+            {% csrf_token %}
+
+            {{form.username}}
+            {% if form.username.errors %}
+            <span style="color:red;">{{ form.username.errors.0 }}</span>
+            {% endif %}
+            <br>
+
+            {{form.password1}}
+            <label for="check" style="display: inline-block;"> Show Password : </label>
+            <input type="checkbox" id="check" style="display: inline-block;">
+            <br>
+            {% if form.password1.errors %}
+            <span style="color:red;">{{ form.password1.errors.0 }}</span>
+            {% endif %}
+            <br>
+            {{form.password2}}
+            {% if form.password2.errors %}
+            <span style="color:red;">{{ form.password2.errors.0 }}</span>
+            {% endif %}<br><br>
+            <br>
+
+
+            <input type="submit" value="submit" class="btn btn-outline-secondary btn-lg rounded-pill mt-3 shadow mb-5"
+                style="max-width: 300px; min-width: 250px;">
+
+            <script>
+                const toggle = document.getElementById('check');
+                const password = document.getElementById('pass');
+
+                toggle.addEventListener('change', function () {
+                    password.type = this.checked ? 'text' : 'password';
+                });
+
+            </script>
+
         </form>
     </center>
+</div>
 
-   
+
+
 
 {% endblock %}
